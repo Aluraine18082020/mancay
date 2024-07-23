@@ -1,0 +1,35 @@
+import pytest
+import time
+import json
+import logging
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+logging.basicConfig(level=logging.INFO, filename='log.txt')
+driver = webdriver.Firefox()
+  
+driver.get("https://www.saucedemo.com/")
+logging.info('Browser Opened')
+driver.save_screenshot('screenie.png')
+driver.set_window_size(1680, 956)
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"username\"]").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"username\"]").send_keys("standard_user")
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"password\"]").send_keys("secret_sauce")
+driver.save_screenshot('screenie1.png')
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"login-button\"]").click()
+logging.info('Berhasil Login')
+logging.info('Homepage')
+driver.save_screenshot('screenie2.png')
+driver.find_element(By.ID, "react-burger-menu-btn").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"inventory-sidebar-link\"]").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"add-to-cart-sauce-labs-backpack\"]").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"shopping-cart-link\"]").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"remove-sauce-labs-backpack\"]").click()
+driver.find_element(By.CSS_SELECTOR, "*[data-test=\"continue-shopping\"]").click()
+driver.quit()
+  
